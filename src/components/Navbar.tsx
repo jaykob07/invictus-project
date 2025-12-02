@@ -35,21 +35,20 @@ export const Navbar = ({ isAdmin = false }: NavbarProps) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-gold flex items-center justify-center">
-              <Package className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent">
-              Accesorios El Duende
-            </h1>
+             <img 
+                src="/duende-logo-oficial.png" 
+                alt="Logo"
+                className="w-20 h-20 rounded-full object-cover"
+              />
           </Link>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild>
+            {/* <Button variant="ghost" size="sm" asChild>
               <Link to="/" className="flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 Inicio
               </Link>
-            </Button>
+            </Button> */}
 
             {isAdmin && (
               <>

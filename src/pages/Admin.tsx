@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
@@ -12,6 +12,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Plus, Loader2 } from "lucide-react";
 import { Session } from "@supabase/supabase-js";
 
+
+
+
 interface Product {
   id: string;
   name: string;
@@ -23,7 +26,7 @@ interface Product {
 
 const Admin = () => {
   const [session, setSession] = useState<Session | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); 
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,63 +36,13 @@ const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session);
-        if (session?.user) {
-          setTimeout(() => {
-            checkAdminStatus(session.user.id);
-          }, 0);
-        } else {
-          navigate("/login");
-        }
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session?.user) {
-        checkAdminStatus(session.user.id);
-      } else {
-        navigate("/login");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  const checkAdminStatus = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", userId)
-        .eq("role", "admin")
-        .maybeSingle();
-
-      if (error) throw error;
-
-      if (data) {
-        setIsAdmin(true);
-        loadProducts();
-      } else {
-        toast({
-          title: "Acceso denegado",
-          description: "No tienes permisos de administrador",
-          variant: "destructive",
-        });
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Error checking admin status:", error);
-      navigate("/");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadProducts = async () => {
+  /**
+   * 🛠️ CORRECCIÓN CLAVE: Función de carga envuelta en useCallback
+   * y manejando su propio estado 'loading'.
+   */
+  const loadProducts = useCallback(async () => {
+    // 1. Inicia la carga aquí
+    setLoading(true); 
     try {
       const { data, error } = await supabase
         .from("products")
@@ -98,15 +51,59 @@ const Admin = () => {
 
       if (error) throw error;
       setProducts(data || []);
+      
     } catch (error: any) {
       toast({
         title: "Error",
         description: "No se pudieron cargar los productos",
         variant: "destructive",
       });
+      console.error("Error al cargar productos:", error);
+      
+    } finally {
+      // 2. Finaliza la carga aquí
+      setLoading(false);
     }
-  };
+  }, [toast]); // Dependencias: solo 'toast' si lo usa
 
+  /**
+   * 🛠️ CORRECCIÓN CLAVE: useEffect modificado
+   */
+  useEffect(() => {
+    const handleAuth = (currentSession: Session | null) => {
+      setSession(currentSession);
+      
+      if (currentSession?.user) {
+        setIsAdmin(true); 
+        // Llama a la carga. loadProducts maneja el setLoading(false) al terminar.
+        loadProducts(); 
+      } else {
+        // No hay sesión: redirigir al login y terminar la carga
+        setIsAdmin(false); 
+        navigate("/login");
+        setLoading(false); // Necesario si se redirige antes de que loadProducts se llame
+      }
+      // ❌ SE ELIMINA DE AQUÍ: setLoading(false); 
+    };
+
+    // 1. Configurar listener de cambios de estado
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        handleAuth(session);
+      }
+    );
+
+    // 2. Comprobar la sesión existente al montar
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      handleAuth(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate, loadProducts]); // Agregamos loadProducts a las dependencias
+
+  /**
+   * Las funciones handleEdit y handleDelete se mantienen iguales
+   */
   const handleEdit = (id: string) => {
     const product = products.find((p) => p.id === id);
     if (product) {
@@ -133,7 +130,8 @@ const Admin = () => {
         description: "El producto se ha eliminado exitosamente",
       });
 
-      loadProducts();
+      // Refresca la lista de productos
+      loadProducts(); 
     } catch (error: any) {
       toast({
         title: "Error",
@@ -151,6 +149,8 @@ const Admin = () => {
       product.reference.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // --- Renderizado ---
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -159,9 +159,14 @@ const Admin = () => {
     );
   }
 
+  if (!session) {
+    // Si no hay sesión, se asume que navigate("/login") ya se ejecutó.
+    return null;
+  }
+  
   return (
     <div className="min-h-screen bg-background">
-      <Navbar isAdmin={isAdmin} />
+      <Navbar isAdmin={isAdmin} /> 
 
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8 space-y-6">
@@ -170,12 +175,12 @@ const Admin = () => {
               <h2 className="text-3xl font-bold text-foreground">Panel de Administración</h2>
               <p className="text-muted-foreground">Gestiona el catálogo de productos</p>
             </div>
+            {/* Botón de Nuevo Producto */}
             <Button onClick={() => { setEditingProduct(null); setShowForm(true); }}>
               <Plus className="w-4 h-4 mr-2" />
               Nuevo Producto
             </Button>
           </div>
-
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
 
@@ -183,13 +188,16 @@ const Admin = () => {
           {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
+              // Propiedades obligatorias del producto
               id={product.id}
               name={product.name}
               reference={product.reference}
               description={product.description}
               price={product.price}
-              imageUrl={product.image_url}
-              isAdmin={true}
+              imageUrl={product.image_url} 
+              
+              // Propiedades de control (CRUD)
+              isAdmin={true} 
               onEdit={handleEdit}
               onDelete={setDeleteProductId}
             />
@@ -205,6 +213,7 @@ const Admin = () => {
         )}
       </main>
 
+      {/* Modal de Creación/Edición */}
       <Dialog open={showForm} onOpenChange={setShowForm}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
@@ -217,7 +226,7 @@ const Admin = () => {
             onSuccess={() => {
               setShowForm(false);
               setEditingProduct(null);
-              loadProducts();
+              loadProducts(); // Recarga la lista después de guardar
             }}
             onCancel={() => {
               setShowForm(false);
@@ -227,6 +236,7 @@ const Admin = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Modal de Confirmación de Eliminación */}
       <AlertDialog open={!!deleteProductId} onOpenChange={() => setDeleteProductId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -248,3 +258,4 @@ const Admin = () => {
 };
 
 export default Admin;
+

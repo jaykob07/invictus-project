@@ -81,13 +81,18 @@ const Index = () => {
         
         <div className="container mx-auto relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-gold-light to-gold bg-clip-text text-transparent animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <img 
+                src="/duende-logo-oficial2.png"
+                alt="Logo El Duende"
+                className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
+              />
+            <h1 className="text-5xl md:text-6xl font-bold font-['Chewy'] bg-gradient-to-r from-primary via-gold-light to-gold bg-clip-text text-transparent">
               Accesorios El Duende
             </h1>
-            <p className="text-xl text-foreground/90 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+            <p className="text-xl text-foreground/90 font-['Fredoka']">
               Tu tienda de tecnología de confianza
             </p>
-            <p className="text-muted-foreground max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+            <p className="text-muted-foreground max-w-2xl mx-auto font-['Fredoka']">
               Encuentra los mejores accesorios y productos tecnológicos con la mejor calidad y precio del mercado
             </p>
           </div>
