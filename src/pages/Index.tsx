@@ -100,7 +100,7 @@ const Index = () => {
       </section>
 
       {/* Search Section */}
-      <section className="py-8 px-4 bg-card/30 backdrop-blur-sm border-y border-border">
+      <section className="py-8 px-4 bg-card/30 bg-[url('public/fondo-login.jpg')] bg-cover backdrop-blur-sm border-y border-border">
         <div className="container mx-auto">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
@@ -151,10 +151,10 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card/30 backdrop-blur-sm py-8 mt-20">
+      <footer className="border-t border-border bg-[url('public/fondo-login.jpg')] bg-cover backdrop-blur-sm py-8 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2024 Accesorios El Duende. Todos los derechos reservados.
+            © 2026 Accesorios El Duende. Powered by Adsvanced.
           </p>
         </div>
       </footer>

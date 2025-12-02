@@ -163,10 +163,10 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         <Input
           id="price"
           type="number"
-          step="0.01"
+          step=""
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          placeholder="0.00"
+          placeholder="000"
           required
         />
       </div>

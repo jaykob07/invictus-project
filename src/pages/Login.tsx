@@ -82,16 +82,20 @@ const Login = () => {
   // if (session) return <p>Cargando...</p>; 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    // <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[url('public/fondo-login.jpg')] bg-cover bg-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-gold mb-4">
-            <Package className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-gold-light bg-clip-text text-transparent mb-2">
-            Accesorios El Duende
+            <img 
+                src="/duende-logo-oficial2.png"
+                alt="Logo El Duende"
+                className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
+              />
+          
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 -50 to-gold-dark bg-clip-text text-transparent mb-2">
+            Panel de Administración Accesorios El Duende
           </h1>
-          <p className="text-muted-foreground">Panel de Administración</p>
+          <p className="text-muted-foreground"></p>
         </div>
 
         <Card className="border-border bg-card">
