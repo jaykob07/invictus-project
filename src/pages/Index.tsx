@@ -73,7 +73,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-dark via-green-mid to-background opacity-90" />
+        <div className="absolute inset-0 bg-[url('/fondo-panel1.jpg')] bg-gradient-to-br from-green-dark via-green-mid to-background opacity-90" />
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000" />
