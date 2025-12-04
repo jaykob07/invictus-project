@@ -83,11 +83,11 @@ const Login = () => {
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-background p-4">
-    <div className="min-h-screen flex items-center justify-center bg-[url('public/fondo-login.jpg')] bg-cover bg-center p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[url('/fondo-login.jpg')] bg-cover bg-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
             <img 
-                src="/duende-logo-oficial2.png"
+                src="/duende-logo-oficial3.png"
                 alt="Logo El Duende"
                 className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
               />

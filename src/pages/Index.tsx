@@ -72,25 +72,27 @@ const Index = () => {
       <Navbar isAdmin={isAdmin} />
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/fondo-panel1.jpg')] bg-gradient-to-br from-green-dark via-green-mid to-background opacity-90" />
+      <section className="relative py-20  px-4 overflow-hidden">
+        {/* <div className="absolute inset-0  bg-gradient-to-br from-green-dark via-green-mid to-background opacity-90" />
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        </div>
+        </div> */}
         
-        <div className="container mx-auto relative z-10">
+        <div className="container  bg-cover bg-center bg-no-repeat rounded-3xl mx-auto relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <img 
-                src="/duende-logo-oficial2.png"
-                alt="Logo El Duende"
+           
+            
+             <img 
+                src="/duende-logo-oficial3.png"
+                alt=""
                 className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
               />
-            <h1 className="text-5xl md:text-6xl font-bold font-['Chewy'] bg-gradient-to-r from-primary via-gold-light to-gold bg-clip-text text-transparent">
-              Accesorios El Duende
-            </h1>
-            <p className="text-xl text-foreground/90 font-['Fredoka']">
-              Tu tienda de tecnología de confianza
+              <h1 className="text-5xl md:text-6xl font-bold font-['Chewy'] bg-gradient-to-r from-primary via-gold-dark to-gold bg-clip-text text-transparent">
+                 Tu tienda de tecnología de confianza
+              </h1>
+            <p className="text-xl from-primary via-gold-dark font-['Fredoka']">
+             
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto font-['Fredoka']">
               Encuentra los mejores accesorios y productos tecnológicos con la mejor calidad y precio del mercado
@@ -100,7 +102,7 @@ const Index = () => {
       </section>
 
       {/* Search Section */}
-      <section className="py-8 px-4 bg-card/30 bg-[url('public/fondo-login.jpg')] bg-cover backdrop-blur-sm border-y border-border">
+      <section className="py-8 px-4 bg-card/30 bg-[url('/fondo-login.jpg')] bg-cover backdrop-blur-sm border-y border-border">
         <div className="container mx-auto">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
@@ -151,7 +153,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-[url('public/fondo-login.jpg')] bg-cover backdrop-blur-sm py-8 mt-20">
+      <footer className="border-t border-border bg-[url('/fondo-login.jpg')] bg-cover backdrop-blur-sm py-8 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © 2026 Accesorios El Duende. Powered by Adsvanced.
