@@ -172,8 +172,8 @@ const Admin = () => {
         <div className="mb-8 space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-foreground">Panel de Administración</h2>
-              <p className="text-muted-foreground">Gestiona el catálogo de productos</p>
+              <h2 className="text-sm font-bold text-foreground">Panel de Administración</h2>
+              <p className="text-muted-foreground text-sm">Gestiona el catálogo de productos</p>
             </div>
             {/* Botón de Nuevo Producto */}
             <Button onClick={() => { setEditingProduct(null); setShowForm(true); }}>

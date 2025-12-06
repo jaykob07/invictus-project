@@ -157,7 +157,6 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
           required
         />
       </div>
-
       <div className="space-y-2">
         <Label htmlFor="price">Precio</Label>
         <Input

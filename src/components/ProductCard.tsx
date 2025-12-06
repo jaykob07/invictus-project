@@ -100,7 +100,7 @@ export const ProductCard = ({
           <p className="text-sm text-muted-foreground">
             <span className="font-medium text-primary">Ref:</span> {reference}
           </p>
-          <p className="text-sm text-card-foreground line-clamp-2">{description}</p>
+          <p className="font-semibold text-yellow-400 text-balance text-card-foreground line-clamp-2">{description}</p>
           
         </div>
       </CardContent>
