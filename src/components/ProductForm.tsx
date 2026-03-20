@@ -14,6 +14,7 @@ interface Product {
   description: string;
   price: number;
   image_url?: string;
+  image_url_2?: string;
 }
 
 interface ProductFormProps {
@@ -28,12 +29,19 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
   const [description, setDescription] = useState(initialData?.description || "");
   const [price, setPrice] = useState(initialData?.price?.toString() || "");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageFile2, setImageFile2] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImageFile(e.target.files[0]);
+    }
+  };
+
+  const handleImageChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile2(e.target.files[0]);
     }
   };
 
@@ -66,12 +74,21 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
 
     try {
       let imageUrl = initialData?.image_url;
+      let imageUrl2 = initialData?.image_url_2;
 
-      // Upload new image if selected
+      // Upload new image 1 if selected
       if (imageFile) {
         imageUrl = await uploadImage(imageFile);
         if (!imageUrl) {
-          throw new Error("Error al subir la imagen");
+          throw new Error("Error al subir la imagen principal");
+        }
+      }
+
+      // Upload new image 2 if selected
+      if (imageFile2) {
+        imageUrl2 = await uploadImage(imageFile2);
+        if (!imageUrl2) {
+          throw new Error("Error al subir la segunda imagen");
         }
       }
 
@@ -81,6 +98,7 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         description,
         price: parseFloat(price),
         image_url: imageUrl,
+        image_url_2: imageUrl2,
       };
 
       if (initialData) {
@@ -157,6 +175,7 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
           required
         />
       </div>
+
       <div className="space-y-2">
         <Label htmlFor="price">Precio</Label>
         <Input
@@ -170,8 +189,9 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         />
       </div>
 
+      {/* Imagen 1 */}
       <div className="space-y-2">
-        <Label htmlFor="image">Imagen del Producto</Label>
+        <Label htmlFor="image">Imagen Principal</Label>
         <div className="flex items-center gap-4">
           <Input
             id="image"
@@ -189,6 +209,30 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         {initialData?.image_url && !imageFile && (
           <p className="text-sm text-muted-foreground">
             Ya hay una imagen cargada. Sube una nueva para reemplazarla.
+          </p>
+        )}
+      </div>
+
+      {/* Imagen 2 */}
+      <div className="space-y-2">
+        <Label htmlFor="image2">Segunda Imagen <span className="text-muted-foreground text-xs">(opcional)</span></Label>
+        <div className="flex items-center gap-4">
+          <Input
+            id="image2"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange2}
+            className="flex-1"
+          />
+          <Button type="button" variant="outline" size="icon" asChild>
+            <label htmlFor="image2" className="cursor-pointer">
+              <Upload className="w-4 h-4" />
+            </label>
+          </Button>
+        </div>
+        {initialData?.image_url_2 && !imageFile2 && (
+          <p className="text-sm text-muted-foreground">
+            Ya hay una segunda imagen cargada. Sube una nueva para reemplazarla.
           </p>
         )}
       </div>

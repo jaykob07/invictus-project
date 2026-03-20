@@ -22,6 +22,7 @@ interface Product {
   description: string;
   price: number;
   image_url?: string;
+  image_url_2?: string;
 }
 
 const Admin = () => {
@@ -194,7 +195,8 @@ const Admin = () => {
               reference={product.reference}
               description={product.description}
               price={product.price}
-              imageUrl={product.image_url} 
+              imageUrl={product.image_url}
+              imageUrl2={product.image_url_2}
               
               // Propiedades de control (CRUD)
               isAdmin={true} 
