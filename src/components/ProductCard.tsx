@@ -156,8 +156,9 @@ export const ProductCard = ({
                 });
               }}
             >
-              <ShoppingCart className="w-4 h-4" />
-              Añadir al carrito
+              <ShoppingCart className="w-4 h-4 shrink-0" />
+              <span className="hidden sm:inline">Añadir al carrito</span>
+              <span className="sm:hidden text-[11px] font-bold">Al carrito</span>
             </Button>
           </CardFooter>
         )}
