@@ -23,6 +23,7 @@ export type Database = {
           name: string
           price: number
           reference: string
+          stock: number
           updated_at: string | null
         }
         Insert: {
@@ -33,6 +34,7 @@ export type Database = {
           name: string
           price: number
           reference: string
+          stock?: number
           updated_at?: string | null
         }
         Update: {
@@ -43,7 +45,38 @@ export type Database = {
           name?: string
           price?: number
           reference?: string
+          stock?: number
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      product_audits: {
+        Row: {
+          id: string
+          product_id: string | null
+          product_name: string
+          action: string
+          user_id: string | null
+          user_email: string | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          product_id?: string | null
+          product_name: string
+          action: string
+          user_id?: string | null
+          user_email?: string | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          product_id?: string | null
+          product_name?: string
+          action?: string
+          user_id?: string | null
+          user_email?: string | null
+          created_at?: string | null
         }
         Relationships: []
       }

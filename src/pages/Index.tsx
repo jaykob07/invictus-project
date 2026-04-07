@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, ChevronDown, Tag } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { Loader2, ChevronDown, Tag, ShoppingCart } from "lucide-react";
 
 interface Product {
   id: string;
@@ -22,6 +23,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const { toast } = useToast();
+  const { cartCount, setIsCartOpen } = useCart();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -251,6 +253,18 @@ const Index = () => {
           </p>
         </div>
       </footer>
+      {/* Floating Cart Button */}
+      {!isAdmin && cartCount > 0 && (
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className="fixed bottom-6 right-6 z-50 bg-primary text-primary-foreground p-4 rounded-full shadow-xl hover:scale-105 transition-transform flex items-center justify-center animate-in fade-in slide-in-from-bottom-5"
+        >
+          <ShoppingCart className="w-6 h-6" />
+          <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+            {cartCount}
+          </span>
+        </button>
+      )}
     </div>
   );
 };

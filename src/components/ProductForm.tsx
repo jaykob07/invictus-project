@@ -13,6 +13,7 @@ interface Product {
   reference: string;
   description: string;
   price: number;
+  stock?: number;
   image_url?: string;
   image_url_2?: string;
 }
@@ -28,6 +29,7 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
   const [reference, setReference] = useState(initialData?.reference || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [price, setPrice] = useState(initialData?.price?.toString() || "");
+  const [stock, setStock] = useState(initialData?.stock?.toString() || "0");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageFile2, setImageFile2] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
@@ -97,18 +99,35 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         reference,
         description,
         price: parseFloat(price),
+        stock: parseInt(stock, 10) || 0,
         image_url: imageUrl,
         image_url_2: imageUrl2,
       };
 
+      const { data: userData } = await supabase.auth.getUser();
+      const userId = userData.user?.id;
+      const userEmail = userData.user?.email;
+
       if (initialData) {
         // Update existing product
-        const { error } = await supabase
+        const { data: updatedProduct, error } = await supabase
           .from("products")
           .update(productData)
-          .eq("id", initialData.id);
+          .eq("id", initialData.id)
+          .select()
+          .single();
 
         if (error) throw error;
+        
+        if (updatedProduct) {
+          await supabase.from("product_audits").insert({
+            product_id: updatedProduct.id,
+            product_name: updatedProduct.name,
+            action: "UPDATE",
+            user_id: userId,
+            user_email: userEmail
+          });
+        }
 
         toast({
           title: "Producto actualizado",
@@ -116,11 +135,23 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         });
       } else {
         // Create new product
-        const { error } = await supabase
+        const { data: newProduct, error } = await supabase
           .from("products")
-          .insert([productData]);
+          .insert([productData])
+          .select()
+          .single();
 
         if (error) throw error;
+        
+        if (newProduct) {
+          await supabase.from("product_audits").insert({
+            product_id: newProduct.id,
+            product_name: newProduct.name,
+            action: "INSERT",
+            user_id: userId,
+            user_email: userEmail
+          });
+        }
 
         toast({
           title: "Producto creado",
@@ -176,17 +207,30 @@ export const ProductForm = ({ onSuccess, onCancel, initialData }: ProductFormPro
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="price">Precio</Label>
-        <Input
-          id="price"
-          type="number"
-          step=""
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="000"
-          required
-        />
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="price">Precio</Label>
+          <Input
+            id="price"
+            type="number"
+            step=""
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="000"
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="stock">Cantidad (Stock)</Label>
+          <Input
+            id="stock"
+            type="number"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+            placeholder="0"
+            required
+          />
+        </div>
       </div>
 
       {/* Imagen 1 */}
