@@ -123,23 +123,23 @@ export const ProductCard = ({
 
         {/* ── Footer ── */}
         {isAdmin ? (
-          <CardFooter className="p-4 pt-0 flex gap-2">
+          <CardFooter className="p-3 sm:p-4 pt-0 flex flex-col xl:flex-row gap-2">
             <Button
               variant="outline"
               size="sm"
-              className="flex-1"
+              className="w-full xl:flex-1 text-[11px] sm:text-sm h-8 sm:h-9"
               onClick={() => onEdit?.(id)}
             >
-              <Edit className="w-4 h-4 mr-2" />
+              <Edit className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2 shrink-0" />
               Editar
             </Button>
             <Button
               variant="destructive"
               size="sm"
-              className="flex-1"
+              className="w-full xl:flex-1 text-[11px] sm:text-sm h-8 sm:h-9"
               onClick={() => onDelete?.(id)}
             >
-              <Trash2 className="w-4 h-4 mr-2" />
+              <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2 shrink-0" />
               Eliminar
             </Button>
           </CardFooter>

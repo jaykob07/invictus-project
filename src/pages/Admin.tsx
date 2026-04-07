@@ -13,7 +13,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Loader2, Download, Package, LayoutDashboard, History, BarChart as BarChartIcon } from "lucide-react";
 import { Session } from "@supabase/supabase-js";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from 'recharts';
 
 interface Product {
   id: string;
@@ -255,7 +255,7 @@ const Admin = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -296,15 +296,19 @@ const Admin = () => {
                 <h4 className="text-lg font-semibold mb-6 flex items-center gap-2"><BarChartIcon className="w-5 h-5 text-primary"/> Productos por Categoría (Barras)</h4>
                 
                 <div className="w-full overflow-x-auto pb-4">
-                  <div className="h-72 min-w-[600px] md:min-w-full">
+                  <div className="h-72 lg:w-full" style={{ minWidth: `${Math.max(600, categoryData.length * 80)}px` }}>
                     {categoryData.length > 0 ? (
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={categoryData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                        <BarChart data={categoryData} margin={{ top: 10, right: 10, left: -20, bottom: 50 }} barCategoryGap={30}>
                           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
-                          <XAxis dataKey="name" tick={{fill: '#888', fontSize: 12}} />
+                          <XAxis dataKey="name" tick={{fill: '#888', fontSize: 11}} interval={0} angle={-45} textAnchor="end" height={60} />
                           <YAxis tick={{fill: '#888', fontSize: 12}} />
                           <RechartsTooltip cursor={{fill: 'transparent'}} contentStyle={{backgroundColor: '#1E1E1E', border: 'none', borderRadius: '8px'}} />
-                          <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                          <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                            {categoryData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                          </Bar>
                         </BarChart>
                       </ResponsiveContainer>
                     ) : (
