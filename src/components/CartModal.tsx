@@ -9,14 +9,14 @@ export const CartModal = () => {
 
   const handleCheckout = () => {
     if (items.length === 0) return;
-    
+
     let message = "Hola Duende, me interesan los siguientes artículos:\n\n";
     items.forEach(item => {
       message += `- ${item.quantity}x ${item.name} (Ref: ${item.reference}): $${(item.price * item.quantity).toLocaleString("es-CO")}\n`;
     });
     message += `\nTotal estimado: $${cartTotal.toLocaleString("es-CO")}`;
-    
-    const whatsappUrl = `https://wa.me/573006092452?text=${encodeURIComponent(message)}`;
+
+    const whatsappUrl = `https://wa.me/573105421033?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
     clearCart();
     setIsCartOpen(false);
@@ -28,7 +28,7 @@ export const CartModal = () => {
         <SheetHeader>
           <SheetTitle className="text-xl font-bold bg-gradient-to-r from-primary to-gold bg-clip-text text-transparent">Mi Carrito</SheetTitle>
         </SheetHeader>
-        
+
         <ScrollArea className="flex-1 -mx-6 px-6">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-40 text-muted-foreground">
@@ -65,7 +65,7 @@ export const CartModal = () => {
             </div>
           )}
         </ScrollArea>
-        
+
         <SheetFooter className="mt-auto pt-4 flex-col gap-4 sm:flex-col border-t border-border">
           <div className="flex justify-between w-full items-center font-semibold text-lg text-foreground">
             <span>Total:</span>
