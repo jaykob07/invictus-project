@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,51 +10,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 140 25% 8%;
-    --foreground: 45 95% 85%;
+    --background: 0 0% 8%;
+    --foreground: 30 15% 90%;
 
-    --card: 140 20% 12%;
-    --card-foreground: 45 95% 85%;
+    --card: 0 0% 12%;
+    --card-foreground: 30 15% 90%;
 
-    --popover: 140 20% 12%;
-    --popover-foreground: 45 95% 85%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 30 15% 90%;
 
-    --primary: 45 92% 55%;
-    --primary-foreground: 140 30% 10%;
+    --primary: 30 35% 72%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 140 30% 18%;
-    --secondary-foreground: 45 95% 85%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 30 15% 88%;
 
-    --muted: 140 20% 15%;
-    --muted-foreground: 45 40% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 30 10% 60%;
 
-    --accent: 150 45% 45%;
-    --accent-foreground: 45 95% 95%;
+    --accent: 30 18% 45%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 45 95% 95%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 140 25% 20%;
-    --input: 140 25% 20%;
-    --ring: 45 92% 55%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 30 18% 55%;
 
     --radius: 0.75rem;
-    
-    /* Custom tokens for golden-green tech theme */
-    --gold: 45 92% 55%;
-    --gold-light: 45 95% 75%;
-    --gold-dark: 42 85% 45%;
-    --green-dark: 140 30% 10%;
-    --green-mid: 140 35% 20%;
-    --green-accent: 150 45% 45%;
-    
+
+    /* Custom tokens */
+    --gold: 30 35% 72%;
+    --gold-light: 30 40% 82%;
+    --gold-dark: 30 28% 58%;
+    --green-dark: 0 0% 8%;
+    --green-mid: 0 0% 18%;
+    --green-accent: 30 18% 45%;
+
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(45 92% 55%) 0%, hsl(42 85% 45%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(140 30% 10%) 0%, hsl(140 25% 15%) 50%, hsl(140 30% 10%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(140 20% 12%) 0%, hsl(140 25% 10%) 100%);
-    
+    --gradient-gold: linear-gradient(135deg, hsl(30 18% 55%) 0%, hsl(30 16% 42%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 12%) 50%, hsl(0 0% 8%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 12%) 0%, hsl(0 0% 10%) 100%);
+
     /* Shadows */
-    --shadow-gold: 0 4px 20px hsl(45 92% 55% / 0.3);
+    --shadow-gold: 0 4px 20px hsl(30 18% 55% / 0.3);
     --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
   }
 }
@@ -63,6 +65,38 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-image: url('/fondo-fragancia.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
   }
+
+  /* En mobile, correr el fondo un poco a la izquierda */
+  @media (max-width: 768px) {
+    body {
+      background-position: 25% center;
+    }
+  }
+}
+
+/* Gradient overlays for bars so they stand out from the background */
+.bar-gradient {
+  background: linear-gradient(135deg,
+      hsl(0 0% 0% / 0.95) 0%,
+      hsl(0 0% 4% / 0.92) 60%,
+      hsl(0 0% 6% / 0.90) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px hsl(0 0% 0% / 0.6);
+}
+
+.bar-gradient-footer {
+  background: linear-gradient(0deg,
+      hsl(0 0% 0% / 0.98) 0%,
+      hsl(0 0% 4% / 0.95) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 24px hsl(0 0% 0% / 0.6);
 }

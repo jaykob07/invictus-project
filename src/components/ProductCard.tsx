@@ -81,7 +81,7 @@ export const ProductCard = ({
             <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-200 flex items-center justify-center">
               <ZoomIn className="text-white opacity-0 group-hover:opacity-80 w-8 h-8 transition-opacity duration-200 drop-shadow-lg" />
             </div>
-            <div className="absolute top-2 right-2 bg-primary/90 backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
+            <div className="absolute top-2 right-2 bg-primary backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-sm font-bold shadow-md">
               ${price.toLocaleString("es-CO")}
             </div>
           </div>
@@ -104,7 +104,7 @@ export const ProductCard = ({
                 </div>
               </div>
             ))}
-            <div className="absolute top-2 right-2 bg-primary/90 backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
+            <div className="absolute top-2 right-2 bg-primary backdrop-blur-sm text-primary-foreground px-3 py-1 rounded-full text-sm font-bold shadow-md">
               ${price.toLocaleString("es-CO")}
             </div>
           </div>
@@ -115,9 +115,9 @@ export const ProductCard = ({
           <div className="space-y-2">
             <h3 className="text-lg font-bold text-foreground line-clamp-1">{name}</h3>
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-primary">Ref:</span> {reference}
+              <span className="font-semibold text-primary">Ref:</span> {reference}
             </p>
-            <p className="font-semibold text-yellow-400 text-balance text-card-foreground line-clamp-2">{description}</p>
+            <p className="text-sm font-medium text-primary/80 line-clamp-2">{description}</p>
           </div>
         </CardContent>
 
@@ -147,7 +147,8 @@ export const ProductCard = ({
           <CardFooter className="p-4 pt-0">
             <Button
               size="sm"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold gap-2"
+              style={{ backgroundColor: '#a08d77', color: '#0a0a0a' }}
+              className="w-full hover:opacity-90 font-semibold gap-2 transition-opacity"
               onClick={() => {
                 addToCart({ id, name, reference, price, imageUrl, imageUrl2 });
                 toast({

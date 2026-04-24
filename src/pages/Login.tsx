@@ -65,7 +65,7 @@ const Login = () => {
         title: 'Bienvenido',
         description: 'Inicio de sesión exitoso',
       });
-      
+
     } catch (error: any) {
       console.error("Login Error:", error);
       toast({
@@ -83,22 +83,24 @@ const Login = () => {
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-background p-4">
-    <div className="min-h-screen flex items-center justify-center bg-[url('/fondo-login.jpg')] bg-cover bg-center p-4">
-      <div className="w-full max-w-md">
+    <div className="relative min-h-screen flex items-center justify-center bg-[url('/bg-julu.jpg')] bg-cover bg-center bg-fixed p-4">
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
-            <img 
-                src="/duende-logo-oficial3.png"
-                alt="Logo El Duende"
-                className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
-              />
-          
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-600 -50 to-gold-dark bg-clip-text text-transparent mb-2">
-            Panel de Administración Accesorios El Duende
+          <img
+            src="/invictus_sin_fondo.png"
+            alt="Logo Invictus"
+            className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
+          />
+
+          <h1 className="text-2xl font-bold mb-2 tracking-widest uppercase" style={{ fontFamily: "'Cinzel', serif", color: '#c4a882' }}>
+            Panel de Administración
           </h1>
           <p className="text-muted-foreground"></p>
         </div>
 
-        <Card className="border-border bg-card">
+        <Card className="border-border/30 bg-black/70 backdrop-blur-xl shadow-2xl">
           <CardHeader>
             <CardTitle>Iniciar Sesión</CardTitle>
             <CardDescription>
@@ -133,7 +135,7 @@ const Login = () => {
                   disabled={loading}
                 />
               </div>
-              
+
               {/* Botones */}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? (

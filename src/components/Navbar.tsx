@@ -31,17 +31,17 @@ export const Navbar = ({ isAdmin = false }: NavbarProps) => {
   };
 
   return (
-    
+
     // <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-    <nav className="border-b border-border bg-cover bg-[url('/fondo-login.jpg')]  backdrop-blur-sm sticky top-0 z-50">
+    <nav className="bar-gradient border-b border-border/40 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-             <img 
-                src="/duende-logo-oficial2.png" 
-                alt="Logo"
-                className="w-20 h-20 rounded-full object-cover"
-              />
+            <img
+              src="/invictus_sin_fondo.png"
+              alt="Logo"
+              className="w-20 h-20 rounded-full object-cover"
+            />
           </Link>
 
           <div className="flex items-center gap-4">

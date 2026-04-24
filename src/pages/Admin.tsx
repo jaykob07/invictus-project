@@ -210,7 +210,7 @@ const Admin = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
@@ -221,7 +221,7 @@ const Admin = () => {
   }
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar isAdmin={isAdmin} /> 
 
       <main className="container mx-auto px-4 py-8">
@@ -285,7 +285,7 @@ const Admin = () => {
           <TabsContent value="dashboard" className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-gold bg-clip-text text-transparent">Métricas del Inventario</h3>
-              <Button onClick={exportToCSV} className="bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/20">
+              <Button onClick={exportToCSV} className="bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-700 hover:to-yellow-600 text-black font-semibold shadow-lg shadow-amber-600/20">
                 <Download className="w-4 h-4 mr-2" />
                 Descargar a Excel (CSV)
               </Button>

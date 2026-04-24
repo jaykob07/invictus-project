@@ -90,7 +90,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar isAdmin={isAdmin} />
 
       {/* Hero Section */}
@@ -98,22 +98,22 @@ const Index = () => {
         <div className="container bg-cover bg-center bg-no-repeat rounded-3xl mx-auto relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <img
-              src="/duende-logo-oficial3.png"
+              src="/invct.jpeg"
               alt=""
-              className="mx-auto rounded-full w-[220px] h-[220px] object-contain animate-in fade-in duration-700"
+              className="mx-auto w-[240px] h-[240px] object-contain animate-in fade-in duration-700 drop-shadow-2xl"
             />
-            <h1 className="text-5xl md:text-6xl font-bold font-['Chewy'] bg-gradient-to-r from-primary via-gold-dark to-gold bg-clip-text text-transparent">
-              Tu tienda de tecnología de confianza
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-gold-dark to-gold bg-clip-text text-transparent tracking-widest uppercase" style={{ fontFamily: "'Cinzel', serif" }}>
+              Fragancias originales
             </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto font-['Fredoka']">
-              Encuentra los mejores accesorios y productos tecnológicos con la mejor calidad y precio del mercado
+            <p className="text-muted-foreground max-w-2xl mx-auto tracking-wide" style={{ fontFamily: "'Lato', sans-serif", fontWeight: 800 }}>
+              Encuentra tu fragancia ideal con la mejor calidad y precio
             </p>
           </div>
         </div>
       </section>
 
       {/* Tag Dropdown Section */}
-      <section className="relative z-40 py-6 px-4 bg-card/30 bg-[url('/fondo-login.jpg')] bg-cover border-y border-border">
+      <section className="relative z-40 py-6 px-4 bar-gradient border-y border-border/40">
         <div className="container mx-auto flex justify-center">
           <div ref={menuRef} className="relative w-full max-w-sm">
 
@@ -147,16 +147,14 @@ const Index = () => {
                   <li>
                     <button
                       onClick={() => handleSelectTag(null)}
-                      className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm font-medium transition-colors duration-150 ${
-                        activeTag === null
-                          ? "bg-primary/15 text-primary"
-                          : "text-foreground hover:bg-muted/60"
-                      }`}
+                      className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm font-medium transition-colors duration-150 ${activeTag === null
+                        ? "bg-primary/15 text-primary"
+                        : "text-foreground hover:bg-muted/60"
+                        }`}
                     >
                       <span
-                        className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                          activeTag === null ? "bg-primary" : "bg-transparent"
-                        }`}
+                        className={`w-2 h-2 rounded-full flex-shrink-0 ${activeTag === null ? "bg-primary" : "bg-transparent"
+                          }`}
                       />
                       Todos
                       <span className="ml-auto text-xs text-muted-foreground font-normal">
@@ -172,16 +170,14 @@ const Index = () => {
                       <li key={tag}>
                         <button
                           onClick={() => handleSelectTag(tag)}
-                          className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm font-medium transition-colors duration-150 ${
-                            activeTag === tag
-                              ? "bg-primary/15 text-primary"
-                              : "text-foreground hover:bg-muted/60"
-                          }`}
+                          className={`w-full flex items-center gap-3 px-5 py-3.5 text-left text-sm font-medium transition-colors duration-150 ${activeTag === tag
+                            ? "bg-primary/15 text-primary"
+                            : "text-foreground hover:bg-muted/60"
+                            }`}
                         >
                           <span
-                            className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                              activeTag === tag ? "bg-primary" : "bg-border"
-                            }`}
+                            className={`w-2 h-2 rounded-full flex-shrink-0 ${activeTag === tag ? "bg-primary" : "bg-border"
+                              }`}
                           />
                           {tag}
                           <span className="ml-auto text-xs text-muted-foreground font-normal">
@@ -246,7 +242,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-[url('/fondo-login.jpg')] bg-cover backdrop-blur-sm py-8 mt-20">
+      <footer className="border-t border-border/40 bar-gradient-footer py-8 mt-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © 2026 Accesorios El Duende. Powered by Adsvanced.
